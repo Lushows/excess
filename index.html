@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es" data-balance="contraste">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EXCESS — DJ de hardtechno · la cabina</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="EXCESS, DJ de hardtechno desde la sabana de Bogotá. Residente de UMBRA CLUB, Tocancipá. Escucha sus sets en la consola, mira dónde ha tocado, sus próximos toques y contrátalo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;800&family=Onest:wght@400;500&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cabina.css?v=6">
+</head>
+<body>
+
+<!-- Entrada: el nombre con las cadenas y el botón que enciende la cabina (el gesto que permite que suene) -->
+<section class="portada" aria-label="Entrada">
+  <video class="portada-fondo foto" src="img/fondo-container.mp4" poster="img/fondo-container.jpg" muted loop playsinline autoplay></video>
+  <div class="portada-velo"></div>
+  <div class="portada-cont">
+    <p class="portada-lema">DJ de hardtechno desde la sabana de Bogotá. Residente de UMBRA CLUB, Tocancipá.</p>
+    <h1 class="portada-nombre" aria-label="EXCESS"><span>Excess</span></h1>
+    <div class="portada-acciones">
+      <button type="button" class="encender">Encender la cabina</button>
+      <span class="portada-pista">o baja para entrar sin sonido</span>
+    </div>
+  </div>
+</section>
+
+<!-- La escena: el container de fondo, la luz y la consola. Se queda fija mientras se baja. -->
+<div class="escena" aria-hidden="false">
+  <video class="escena-fondo foto" src="img/fondo-container.mp4" poster="img/fondo-container.jpg" muted loop playsinline autoplay></video>
+  <div class="haz" aria-hidden="true"></div>
+  <div class="grano" aria-hidden="true"></div>
+
+  <div class="relato" aria-live="polite">
+    <h2 class="relato-titulo">Escucha</h2>
+    <p class="relato-texto">Sus sets, sonando en la consola. Dale play y gira el plato para avanzar.</p>
+    <div class="relato-accion"></div>
+  </div>
+
+  <div class="cdj-marco">
+  <div class="cdj" data-ui>
+    <div class="cdj-arriba">
+      <nav class="teclas" aria-label="Menús de la consola">
+        <button type="button" class="tecla" data-modo="sets" aria-pressed="true"><i></i>Browse</button>
+        <button type="button" class="tecla" data-modo="history" aria-pressed="false"><i></i>History</button>
+        <button type="button" class="tecla" data-modo="cuelist" aria-pressed="false"><i></i>Cue list</button>
+        <button type="button" class="tecla" data-modo="info" aria-pressed="false"><i></i>Info</button>
+        <button type="button" class="tecla" data-modo="link" aria-pressed="false"><i></i>Link</button>
+      </nav>
+
+      <div class="vidrio">
+        <div class="pantalla">
+          <div class="barra-estado">
+            <span class="deck">1</span>
+            <span class="titulo-pista"><span>Elige un set en Browse</span></span>
+            <span class="t-pasado">00:00</span><span class="t-resta">-00:00</span>
+          </div>
+
+          <div class="modos">
+            <section class="modo" data-modo="sets">
+              <div class="cab-lista"><span>Sets</span><span>EXCESS__DJ · SoundCloud</span></div>
+              <ol class="lista lista-sets"><li class="vacia">Conectando con SoundCloud…</li></ol>
+            </section>
+
+            <section class="modo" data-modo="history" hidden>
+              <div class="hist">
+                <div>
+                  <div class="cab-lista"><span>History</span><span class="conteo-hist"></span></div>
+                  <ol class="lista lista-hist"></ol>
+                </div>
+                <svg class="mapa" role="img" aria-label="Mapa de Colombia con los lugares donde ha tocado"></svg>
+              </div>
+            </section>
+
+            <section class="modo" data-modo="cuelist" hidden>
+              <div class="cab-lista"><span>Cue list · próximos toques</span><span class="cuenta-atras"></span></div>
+              <ol class="lista lista-fechas"></ol>
+            </section>
+
+            <section class="modo" data-modo="info" hidden>
+              <div class="info">
+                <img class="foto" src="img/retrato-negro.jpg" alt="Retrato de EXCESS">
+                <div>
+                  <p class="info-nombre">EXCESS</p>
+                  <p>DJ desde 2021, autodidacta: empezó en una DDJ-400 tocando para los amigos. Hoy toca en CDJ-3000 y dirige UMBRA, el colectivo y el club de Tocancipá.</p>
+                  <p>Hardtechno, dark techno e industrial en una sola sesión. Contundente, técnico, preciso.</p>
+                </div>
+              </div>
+              <div class="cinta" aria-label="Artistas con los que compartió tarima"><div class="cinta-mueve"></div></div>
+            </section>
+
+            <section class="modo" data-modo="link" hidden>
+              <form class="booking">
+                <p class="booking-tit">Booking · llega directo a su WhatsApp</p>
+                <label>Fecha<input type="date" name="fecha" required></label>
+                <label>Ciudad<input type="text" name="ciudad" autocomplete="address-level2" placeholder="Bogotá" required></label>
+                <label class="ancho">Evento o club<input type="text" name="evento" placeholder="Nombre del evento" required></label>
+                <button type="submit">Enviar por WhatsApp</button>
+              </form>
+            </section>
+          </div>
+
+          <canvas class="onda" aria-label="Forma de onda del set: toca para saltar"></canvas>
+          <div class="video-set" hidden></div>
+        </div>
+      </div>
+
+      <div class="perilla-col">
+        <div class="perilla" role="slider" tabindex="0" aria-label="Perilla: gira para recorrer la lista" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+        <span class="rotulo">Rotary</span>
+        <button type="button" class="tecla-chica cargar">Load</button>
+      </div>
+    </div>
+
+    <div class="pads" role="group" aria-label="Hot cues: saltan a partes del set">
+      <button type="button" class="pad">A</button><button type="button" class="pad">B</button><button type="button" class="pad">C</button><button type="button" class="pad">D</button>
+      <button type="button" class="pad">E</button><button type="button" class="pad">F</button><button type="button" class="pad">G</button><button type="button" class="pad">H</button>
+    </div>
+
+    <div class="cdj-abajo">
+      <div class="transporte">
+        <span class="placa">EXCESS</span>
+        <button type="button" class="redondo cue" aria-label="Cue: volver al inicio">Cue</button>
+        <button type="button" class="redondo play" aria-pressed="false" aria-label="Reproducir">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+          <svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+        </button>
+      </div>
+
+      <div class="jog" role="slider" tabindex="0" aria-label="Plato: arrástralo en círculo para avanzar o retroceder" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="jog-anillo"></div>
+        <div class="jog-plato"><div class="jog-pantalla"><img src="img/retrato-negro.jpg" alt=""><i class="jog-marca"></i></div></div>
+      </div>
+
+      <div class="lado-der">
+        <div class="balance" role="group" aria-label="Balance de la imagen">
+          <button type="button" data-b="contraste" aria-pressed="true">Hard</button>
+          <button type="button" data-b="sombra" aria-pressed="false">Dark</button>
+          <button type="button" data-b="negativo" aria-pressed="false">Ind</button>
+        </div>
+        <label class="tempo"><span>Volumen</span><input type="range" min="0" max="100" value="80"><output>80</output></label>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Los capítulos: cada uno, al pasar por la mitad de la pantalla, cambia el menú de la consola -->
+<main class="capitulos">
+  <section class="capitulo" data-modo="sets" id="escuchar"></section>
+  <section class="capitulo" data-modo="history" id="donde"></section>
+  <section class="capitulo" data-modo="cuelist" id="fechas"></section>
+  <section class="capitulo" data-modo="info" id="quien"></section>
+  <section class="capitulo" data-modo="link" id="booking"></section>
+</main>
+
+<footer class="pie">
+  <p class="pie-nombre" aria-hidden="true"><span>Excess</span></p>
+  <div class="pie-linea">
+    <span>EXCESS · Tocancipá, sabana de Bogotá</span>
+    <nav aria-label="Redes"><a href="https://soundcloud.com/excess_ht-dj" target="_blank" rel="noopener">SoundCloud</a><a href="https://www.instagram.com/excess__dj" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/ExcessDJ795" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/umbra_club" target="_blank" rel="noopener">UMBRA CLUB</a></nav>
+  </div>
+</footer>
+
+<iframe class="sc" title="Reproductor de SoundCloud de EXCESS" allow="autoplay; encrypted-media"
+  src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fusers%2F132857385&auto_play=false&show_artwork=false&visual=false"></iframe>
+<script src="cabina.js?v=6"></script>
+</body>
+</html>

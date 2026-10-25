@@ -1,0 +1,7 @@
+{
+  "nota": "Próximos toques. EXCESS o Luis los agregan aquí: fecha AAAA-MM-DD, hora, lugar, ciudad y link de boletas. Las de 'ejemplo: true' son de muestra y se borran antes de publicar.",
+  "fechas": [
+    { "fecha": "2026-11-14", "hora": "23:00", "lugar": "UMBRA CLUB", "ciudad": "Tocancipá", "boletas": "", "ejemplo": true },
+    { "fecha": "2026-12-05", "hora": "22:00", "lugar": "Por anunciar", "ciudad": "Bogotá", "boletas": "", "ejemplo": true }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "nota": "Dónde ha tocado EXCESS. Fuente: press kit y cuestionario (24-oct-2026). Agregar arriba lo más reciente.",
+  "lugares": [
+    { "lugar": "UMBRA CLUB", "ciudad": "Tocancipá", "detalle": "Residencia" },
+    { "lugar": "Radio Berlín", "ciudad": "Bogotá", "detalle": "" },
+    { "lugar": "Antisistema", "ciudad": "Bogotá", "detalle": "" },
+    { "lugar": "Anticuario", "ciudad": "Bogotá", "detalle": "Umbras Possession · Despedida Hard Kapital Tour Europa 2022" },
+    { "lugar": "Radio 57", "ciudad": "Bogotá", "detalle": "Music and Pets" },
+    { "lugar": "Club Gallístico San Miguel", "ciudad": "Bogotá", "detalle": "" },
+    { "lugar": "El Galpón", "ciudad": "Sibaté", "detalle": "Infected System" },
+    { "lugar": "Ibagué Free Rave", "ciudad": "Ibagué", "detalle": "" },
+    { "lugar": "Fiestas en la sabana", "ciudad": "Zipaquirá", "detalle": "" },
+    { "lugar": "Fiestas en la sabana", "ciudad": "Cajicá", "detalle": "" },
+    { "lugar": "Fiestas en la sabana", "ciudad": "Gachancipá", "detalle": "" },
+    { "lugar": "Fiestas en la sabana", "ciudad": "Suesca", "detalle": "" },
+    { "lugar": "Presentación", "ciudad": "Medellín", "detalle": "" }
+  ],
+  "compartio": ["Acid Flux (MX)", "Leon KB (BR)", "Bamb (BR)", "Loraw (DE)", "Ledh", "Dabeat", "Sonico", "Lourdes", "Bugstrip", "Aleja Vargas", "Alex Jockey", "Soufly", "Bluekim", "E-Machine", "Raveyeff"]
+}
