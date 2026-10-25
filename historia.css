@@ -306,3 +306,49 @@ blockquote cite{display:block;margin-top:14px;font:500 16px "Onest";font-style:n
 .sonido{align-items:center}
 .sonido-foto img{max-height:80svh}
 .umbra-panel figure{max-height:70svh}
+
+/* ═══════════ Capa editorial (directorcreativo 152 + 159, desingweb 45) ═══════════
+   Tres voces: Unbounded = titulares (la marca) · Newsreader = lectura y citas · Onest = rótulos, créditos y botones. */
+:root{ --serif:"Newsreader","Iowan Old Style",Georgia,serif; --sans:"Onest",system-ui,sans-serif; }
+body{font-family:var(--serif);font-size:clamp(1.125rem,1.05rem + .35vw,1.3rem);line-height:1.6;
+  font-kerning:normal;font-feature-settings:"kern","liga","onum";font-optical-sizing:auto}
+.capitulo p,.linea-pista p,.lema{text-wrap:pretty;hanging-punctuation:first last}
+.capitulo p{max-width:60ch}
+/* lo que es interfaz vuelve a la sans */
+.barra,.btn,.enlace,.generos button,.umbra-pestanas button,.lugares li span,.lugares li small,.cuenta,.fechas .dia small,.fechas .lugar small,
+.formulario label,.formulario input,.pie-linea,figcaption,.video-fachada,.genero-nota,.rider,.galeria-cabeza p,.linea-cabeza p,.palabras,.carrete button span,.visor p,.cinta{font-family:var(--sans)}
+.lema{font-family:var(--serif);font-size:clamp(1.35rem,1.15rem + .8vw,1.9rem);line-height:1.3;font-weight:400}
+
+/* antetítulo: dice en qué capítulo de la historia estás (la historia sí es una secuencia) */
+.kicker{display:block;font:500 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin-bottom:22px}
+.viene .kicker{color:var(--acero)}
+/* bajada: la frase que abre cada capítulo, en cursiva */
+.bajada{font:italic 400 clamp(1.3rem,1.1rem + .8vw,1.8rem)/1.32 var(--serif);color:var(--hueso);max-width:34ch!important}
+.viene .bajada{color:var(--acero)}
+/* capitular */
+.capitular::first-letter{-webkit-initial-letter:3 2;initial-letter:3 2;font-family:"Unbounded",sans-serif;font-weight:800;margin-right:.12em;color:var(--luz)}
+@supports not (initial-letter:3){.capitular::first-letter{float:left;font-size:4.1em;line-height:.8;margin:.06em .1em 0 0}}
+/* citas: cursiva grande, comilla colgada */
+blockquote{font:italic 400 clamp(2rem,1.3rem + 2.6vw,3.6rem)/1.06 var(--serif);letter-spacing:-.015em;max-width:20ch;text-indent:-.42em}
+blockquote cite{text-indent:0;font-family:var(--sans)}
+/* subtítulos editoriales en serif: contraste con los titulares anchos */
+h3{font:500 clamp(1.45rem,1.2rem + .9vw,2.1rem)/1.12 var(--serif);letter-spacing:-.01em}
+.linea-pista h3{font-family:var(--serif)}
+.linea-pista b{font:500 clamp(1.2rem,1rem + .6vw,1.6rem)/1 "Unbounded",sans-serif;letter-spacing:-.02em;color:var(--luz);margin-bottom:12px;font-variant-numeric:lining-nums}
+.lugares li b{font-family:var(--serif);font-weight:500;font-size:clamp(1.25rem,1.1rem + .6vw,1.65rem);letter-spacing:0}
+.fechas .lugar{font-family:var(--serif);font-weight:500;letter-spacing:0}
+.fechas .dia{font-variant-numeric:lining-nums}
+.umbra-info h3{font-size:clamp(1.6rem,1.3rem + 1vw,2.4rem)}
+/* créditos de foto, como en revista */
+.credito{display:block;margin-top:10px;font:400 13px var(--sans);letter-spacing:.04em;color:var(--ceniza)}
+.credito b{font-weight:500;color:var(--niebla)}
+figcaption{font-size:14px}
+.viene-cabeza{grid-column:1/-1;display:grid;gap:18px}
+.portada-retrato{overflow:visible}
+.portada-retrato .credito{position:absolute;right:0;bottom:calc(100% + 8px);margin:0}
+.portada-retrato{position:relative}
+.portada-retrato img{display:block}
+.linea-cabeza h2{margin-top:0}
+@media (min-width:901px){ .linea-pin{padding-top:calc(66px + clamp(28px,4vh,56px))} }
+.umbra-cabeza .kicker{grid-column:1/-1;margin-bottom:0}
+@media (max-width:900px){ blockquote{text-indent:0} }

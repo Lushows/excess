@@ -87,7 +87,7 @@
   FOTOS.forEach(([n, t]) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Ver grande: ${t}`);
     const i = document.createElement('img'); i.className = 'foto'; i.src = `img/${n}.jpg`; i.alt = t; i.loading = 'lazy';
     const s = document.createElement('span'); s.textContent = t; b.append(i, s);
-    b.addEventListener('click', () => { if (movido) return; $('img', visor).src = i.src; $('img', visor).alt = t; $('p', visor).textContent = t; destello(.3); visor.showModal(); });
+    b.addEventListener('click', () => { if (movido) return; $('img', visor).src = i.src; $('img', visor).alt = t; $('p', visor).textContent = ['retrato-negro','retrato-chaqueta','tomine'].includes(n) ? `${t} · Foto: José Luis` : t; destello(.3); visor.showModal(); });
     carrete.append(b); });
   $('.cerrar', visor).addEventListener('click', () => visor.close());
   visor.addEventListener('click', (e) => { if (e.target === visor) visor.close(); });
