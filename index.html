@@ -3,169 +3,214 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EXCESS — DJ de hardtechno · la cabina</title>
+<title>EXCESS — DJ de hardtechno · Bogotá</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="EXCESS, DJ de hardtechno desde la sabana de Bogotá. Residente de UMBRA CLUB, Tocancipá. Escucha sus sets en la consola, mira dónde ha tocado, sus próximos toques y contrátalo.">
+<meta name="description" content="EXCESS, DJ de hardtechno de Bogotá. Creó y dirige UMBRA y es residente de UMBRA CLUB en Tocancipá. Su historia, su sonido, sus sets y booking.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;800&family=Onest:wght@400;500&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="cabina.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800&family=Onest:wght@400;500&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="historia.css?v=5">
 </head>
 <body>
 
-<!-- Entrada: el nombre con las cadenas y el botón que enciende la cabina (el gesto que permite que suene) -->
-<section class="portada" aria-label="Entrada">
-  <video class="portada-fondo foto" src="img/fondo-container.mp4" poster="img/fondo-container.jpg" muted loop playsinline autoplay></video>
-  <div class="portada-velo"></div>
-  <div class="portada-cont">
-    <p class="portada-lema">DJ de hardtechno desde la sabana de Bogotá. Residente de UMBRA CLUB, Tocancipá.</p>
-    <h1 class="portada-nombre" aria-label="EXCESS"><span>Excess</span></h1>
-    <div class="portada-acciones">
-      <button type="button" class="encender">Encender la cabina</button>
-      <span class="portada-pista">o baja para entrar sin sonido</span>
+<header class="barra">
+  <a class="marca" href="#inicio" aria-label="EXCESS, inicio">Excess</a>
+  <nav aria-label="Principal">
+    <a href="#historia">Historia</a><a href="#sonido">Sonido</a><a href="#escuchar">Escuchar</a><a href="#umbra">UMBRA</a><a href="#fechas">Fechas</a>
+  </nav>
+  <a class="btn btn-claro" href="#booking">Contratar</a>
+</header>
+
+<!-- ───────── Portada ───────── -->
+<section class="portada" id="inicio">
+  <div class="portada-texto">
+    <p class="lema">DJ de hardtechno de Bogotá. Creó y dirige UMBRA, y es residente de UMBRA CLUB en Tocancipá.</p>
+    <div class="acciones">
+      <a class="btn btn-claro" href="#escuchar">Escuchar sus sets</a>
+      <a class="enlace" href="#booking">Contratarlo para tu evento</a>
     </div>
+  </div>
+  <figure class="portada-retrato"><img class="foto" src="img/retrato-negro.jpg" alt="Retrato de EXCESS con gafas oscuras" width="1067" height="1600"></figure>
+  <h1 class="monumento" aria-label="EXCESS"><span>Excess</span></h1>
+</section>
+
+<!-- ───────── El nombre ───────── -->
+<section class="capitulo nombre-cap" id="historia">
+  <figure class="nombre-foto revela"><img class="foto" src="img/malla.jpg" alt="EXCESS detrás de una malla, con capucha y gafas" width="1200" height="1600" loading="lazy"></figure>
+  <div class="nombre-texto">
+    <h2 class="revela">Nunca era suficiente</h2>
+    <p class="revela">Así nació el nombre. En la música electrónica nunca le bastaba: quería escuchar más, sentir más, estar más tiempo en la pista. Por eso EXCESS.</p>
+    <p class="revela">Hoy el nombre significa otra cosa para él: fuerza, contundencia y mucho exceso de amor y de disciplina.</p>
+    <blockquote class="revela">"No separo al artista del ser humano que está detrás."<cite>EXCESS</cite></blockquote>
   </div>
 </section>
 
-<!-- La escena: el container de fondo, la luz y la consola. Se queda fija mientras se baja. -->
-<div class="escena" aria-hidden="false">
-  <video class="escena-fondo foto" src="img/fondo-container.mp4" poster="img/fondo-container.jpg" muted loop playsinline autoplay></video>
-  <div class="haz" aria-hidden="true"></div>
-  <div class="grano" aria-hidden="true"></div>
-
-  <div class="relato" aria-live="polite">
-    <h2 class="relato-titulo">Escucha</h2>
-    <p class="relato-texto">Sus sets, sonando en la consola. Dale play y gira el plato para avanzar.</p>
-    <div class="relato-accion"></div>
-  </div>
-
-  <div class="cdj-marco">
-  <div class="cdj" data-ui>
-    <div class="cdj-arriba">
-      <nav class="teclas" aria-label="Menús de la consola">
-        <button type="button" class="tecla" data-modo="sets" aria-pressed="true"><i></i>Browse</button>
-        <button type="button" class="tecla" data-modo="history" aria-pressed="false"><i></i>History</button>
-        <button type="button" class="tecla" data-modo="cuelist" aria-pressed="false"><i></i>Cue list</button>
-        <button type="button" class="tecla" data-modo="info" aria-pressed="false"><i></i>Info</button>
-        <button type="button" class="tecla" data-modo="link" aria-pressed="false"><i></i>Link</button>
-      </nav>
-
-      <div class="vidrio">
-        <div class="pantalla">
-          <div class="barra-estado">
-            <span class="deck">1</span>
-            <span class="titulo-pista"><span>Elige un set en Browse</span></span>
-            <span class="t-pasado">00:00</span><span class="t-resta">-00:00</span>
-          </div>
-
-          <div class="modos">
-            <section class="modo" data-modo="sets">
-              <div class="cab-lista"><span>Sets</span><span>EXCESS__DJ · SoundCloud</span></div>
-              <ol class="lista lista-sets"><li class="vacia">Conectando con SoundCloud…</li></ol>
-            </section>
-
-            <section class="modo" data-modo="history" hidden>
-              <div class="hist">
-                <div>
-                  <div class="cab-lista"><span>History</span><span class="conteo-hist"></span></div>
-                  <ol class="lista lista-hist"></ol>
-                </div>
-                <svg class="mapa" role="img" aria-label="Mapa de Colombia con los lugares donde ha tocado"></svg>
-              </div>
-            </section>
-
-            <section class="modo" data-modo="cuelist" hidden>
-              <div class="cab-lista"><span>Cue list · próximos toques</span><span class="cuenta-atras"></span></div>
-              <ol class="lista lista-fechas"></ol>
-            </section>
-
-            <section class="modo" data-modo="info" hidden>
-              <div class="info">
-                <img class="foto" src="img/retrato-negro.jpg" alt="Retrato de EXCESS">
-                <div>
-                  <p class="info-nombre">EXCESS</p>
-                  <p>DJ desde 2021, autodidacta: empezó en una DDJ-400 tocando para los amigos. Hoy toca en CDJ-3000 y dirige UMBRA, el colectivo y el club de Tocancipá.</p>
-                  <p>Hardtechno, dark techno e industrial en una sola sesión. Contundente, técnico, preciso.</p>
-                </div>
-              </div>
-              <div class="cinta" aria-label="Artistas con los que compartió tarima"><div class="cinta-mueve"></div></div>
-            </section>
-
-            <section class="modo" data-modo="link" hidden>
-              <form class="booking">
-                <p class="booking-tit">Booking · llega directo a su WhatsApp</p>
-                <label>Fecha<input type="date" name="fecha" required></label>
-                <label>Ciudad<input type="text" name="ciudad" autocomplete="address-level2" placeholder="Bogotá" required></label>
-                <label class="ancho">Evento o club<input type="text" name="evento" placeholder="Nombre del evento" required></label>
-                <button type="submit">Enviar por WhatsApp</button>
-              </form>
-            </section>
-          </div>
-
-          <canvas class="onda" aria-label="Forma de onda del set: toca para saltar"></canvas>
-          <div class="video-set" hidden></div>
-        </div>
-      </div>
-
-      <div class="perilla-col">
-        <div class="perilla" role="slider" tabindex="0" aria-label="Perilla: gira para recorrer la lista" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
-        <span class="rotulo">Rotary</span>
-        <button type="button" class="tecla-chica cargar">Load</button>
-      </div>
+<!-- ───────── La historia: línea de tiempo ───────── -->
+<section class="linea" aria-labelledby="linea-titulo">
+  <div class="linea-pin">
+    <div class="linea-cabeza">
+      <h2 id="linea-titulo">De la percusión a la cabina</h2>
+      <p>Aprendió solo. Esta es la ruta.</p>
+      <div class="linea-avance" aria-hidden="true"><i></i></div>
     </div>
+    <ol class="linea-pista">
+      <li><figure><img class="foto" src="img/umbra-manos.jpg" alt="Las manos de EXCESS sobre el mixer" loading="lazy"></figure>
+        <div><b>Desde muy joven</b><h3>La percusión</h3><p>Antes de los platos fueron los instrumentos, sobre todo la percusión. Ahí empezó su relación con el ritmo.</p></div></li>
+      <li><figure><img class="foto" src="img/pista.jpg" alt="La pista llena frente a la cabina" loading="lazy"></figure>
+        <div><b>2012 – 2013</b><h3>La fiesta</h3><p>Se acerca a la música electrónica. Lo que empezó como fascinación por la energía de las fiestas se volvió una búsqueda: entender el sonido.</p></div></li>
+      <li><figure><img class="foto" src="img/estudio.jpg" alt="EXCESS mezclando en su estudio" loading="lazy"></figure>
+        <div><b>Marzo de 2021</b><h3>Una DDJ&#8209;400 en la casa</h3><p>Compra la controladora que acababa de salir y toca para los amigos, sin saber si lo hacía bien o mal. Nunca tomó una clase.</p></div></li>
+      <li><figure><img class="foto" src="img/umbra-cdj.jpg" alt="EXCESS en los CDJ" loading="lazy"></figure>
+        <div><b>7 a 8 horas al día</b><h3>La disciplina</h3><p>En la etapa decisiva de su formación practicó entre siete y ocho horas diarias para perfeccionar cada mezcla y cada cambio.</p></div></li>
+      <li><figure><img class="foto" src="img/visuales-1.jpg" alt="EXCESS en cabina frente a los visuales" loading="lazy"></figure>
+        <div><b>2022</b><h3>Anticuario, Bogotá</h3><p>Toca en la despedida del Hard Kapital Tour Europa 2022 y empieza a compartir tarima con nombres de la escena.</p></div></li>
+      <li><figure><img class="foto" src="img/container-cdj.jpg" alt="EXCESS en el container de UMBRA" loading="lazy"></figure>
+        <div><b>UMBRA</b><h3>Su propia casa</h3><p>Crea UMBRA: eventos, colectivo, estudio y escuela de DJ. Hoy es residente de UMBRA CLUB, en Tocancipá.</p></div></li>
+      <li><figure><img class="foto" src="img/a001-violeta.jpg" alt="EXCESS en la cabina del container, bajo las cadenas" loading="lazy"></figure>
+        <div><b>31 de mayo de 2025</b><h3>La noche</h3><p>Por primera vez junta todos sus géneros en una sola sesión. "La gente no bajaba de la euforia en la que yo estaba."</p></div></li>
+      <li><figure><img class="foto" src="img/retrato-chaqueta.jpg" alt="EXCESS frente al agua en la sabana" loading="lazy"></figure>
+        <div><b>Hoy</b><h3>Música propia en camino</h3><p>Toca en CDJ-3000, lleva su sonido por la sabana, Bogotá, Ibagué y Medellín, y trabaja en sus primeros tracks.</p></div></li>
+    </ol>
+  </div>
+</section>
 
+<!-- ───────── El sonido ───────── -->
+<section class="capitulo sonido" id="sonido">
+  <div class="sonido-texto">
+    <h2 class="revela">Se construye desde el contraste</h2>
+    <p class="revela">Serio, contundente y meticuloso, pero con espacio para melodías envolventes y atmósferas que le dan profundidad a sus sets. Cada mezcla, transición y cambio responde a una intención.</p>
+    <div class="generos revela" role="group" aria-label="Escoge un género para ver cómo cambia la imagen">
+      <button type="button" data-b="contraste" aria-pressed="true">Hardtechno</button>
+      <button type="button" data-b="sombra" aria-pressed="false">Dark techno</button>
+      <button type="button" data-b="negativo" aria-pressed="false">Industrial</button>
+    </div>
+    <p class="genero-nota" aria-live="polite">Su línea principal. Rápido, duro y directo, como el bombo.</p>
+    <p class="palabras revela">Contundente · Técnico · Preciso · Potente · Ágil</p>
+  </div>
+  <figure class="sonido-foto revela"><img class="foto" src="img/visuales-2.jpg" alt="EXCESS mezclando frente a la pantalla de visuales" width="1200" height="1600" loading="lazy">
+    <figcaption>Toca los géneros: la imagen cambia como cambia su set.</figcaption></figure>
+</section>
+
+<!-- ───────── Escúchalo: la consola ───────── -->
+<section class="capitulo escuchar" id="escuchar">
+  <div class="escuchar-texto">
+    <h2 class="revela">Escúchalo</h2>
+    <p class="revela">Tres sets de su SoundCloud, en una consola como la que usa en tarima. Dale play, gira el plato para avanzar y salta con los pads.</p>
+    <button type="button" class="video-fachada revela" data-youtube="5wfIJ_eQi3o" aria-label="Ver su set en Los Decks 2025 desde UMBRA CLUB">
+      <img src="https://i.ytimg.com/vi/5wfIJ_eQi3o/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+      <span>Ver su set en Los Decks 2025 · UMBRA CLUB</span>
+    </button>
+    <a class="btn btn-claro revela" href="#booking">Lo quiero en mi evento</a>
+  </div>
+  <div class="cdj revela" data-ui>
+    <div class="pantalla">
+      <div class="barra-estado"><span class="deck">1</span><span class="titulo-pista"><span>Conectando con SoundCloud…</span></span><span class="t-pasado">00:00</span><span class="t-resta">-00:00</span></div>
+      <ol class="lista lista-sets" aria-label="Sets"></ol>
+      <canvas class="onda" aria-label="Forma de onda del set: toca para saltar"></canvas>
+    </div>
     <div class="pads" role="group" aria-label="Hot cues: saltan a partes del set">
       <button type="button" class="pad">A</button><button type="button" class="pad">B</button><button type="button" class="pad">C</button><button type="button" class="pad">D</button>
       <button type="button" class="pad">E</button><button type="button" class="pad">F</button><button type="button" class="pad">G</button><button type="button" class="pad">H</button>
     </div>
-
     <div class="cdj-abajo">
       <div class="transporte">
-        <span class="placa">EXCESS</span>
         <button type="button" class="redondo cue" aria-label="Cue: volver al inicio">Cue</button>
         <button type="button" class="redondo play" aria-pressed="false" aria-label="Reproducir">
           <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
           <svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
         </button>
       </div>
-
       <div class="jog" role="slider" tabindex="0" aria-label="Plato: arrástralo en círculo para avanzar o retroceder" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <div class="jog-anillo"></div>
         <div class="jog-plato"><div class="jog-pantalla"><img src="img/retrato-negro.jpg" alt=""><i class="jog-marca"></i></div></div>
       </div>
-
-      <div class="lado-der">
-        <div class="balance" role="group" aria-label="Balance de la imagen">
-          <button type="button" data-b="contraste" aria-pressed="true">Hard</button>
-          <button type="button" data-b="sombra" aria-pressed="false">Dark</button>
-          <button type="button" data-b="negativo" aria-pressed="false">Ind</button>
-        </div>
-        <label class="tempo"><span>Volumen</span><input type="range" min="0" max="100" value="80"><output>80</output></label>
-      </div>
+      <label class="volumen"><span>Volumen</span><input type="range" min="0" max="100" value="80"><output>80</output></label>
     </div>
   </div>
-  </div>
-</div>
+</section>
 
-<!-- Los capítulos: cada uno, al pasar por la mitad de la pantalla, cambia el menú de la consola -->
-<main class="capitulos">
-  <section class="capitulo" data-modo="sets" id="escuchar"></section>
-  <section class="capitulo" data-modo="history" id="donde"></section>
-  <section class="capitulo" data-modo="cuelist" id="fechas"></section>
-  <section class="capitulo" data-modo="info" id="quien"></section>
-  <section class="capitulo" data-modo="link" id="booking"></section>
-</main>
+<!-- ───────── UMBRA ───────── -->
+<section class="capitulo umbra" id="umbra">
+  <div class="umbra-cabeza">
+    <img class="umbra-logo revela" src="img/umbra-logo.png" alt="UMBRA" width="900" height="170">
+    <h2 class="revela">El proyecto que creó y dirige</h2>
+    <p class="revela">UMBRA nació como una marca de eventos con identidad propia y creció hacia todo lo que rodea la música. Por ahí han pasado artistas nacionales e internacionales, y también los que apenas empiezan.</p>
+  </div>
+  <div class="umbra-cuerpo">
+    <div class="umbra-pestanas" role="tablist" aria-label="Las partes de UMBRA">
+      <button type="button" role="tab" aria-selected="true" aria-controls="umbra-panel" data-i="0">UMBRA CLUB</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="umbra-panel" data-i="1">UMBRA ESTUDIO</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="umbra-panel" data-i="2">UMBRA COLLECTIVE</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="umbra-panel" data-i="3">Escuela de DJ</button>
+    </div>
+    <div class="umbra-panel" id="umbra-panel" role="tabpanel">
+      <figure><img class="foto" src="img/a001-rojo.jpg" alt="" loading="lazy"></figure>
+      <div class="umbra-info"><h3>UMBRA CLUB</h3><p></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Dónde ha sonado ───────── -->
+<section class="capitulo donde" id="donde">
+  <div class="donde-texto">
+    <h2 class="revela">Dónde ha sonado</h2>
+    <p class="revela">De su residencia en Tocancipá a los clubes de Bogotá, Sibaté, Ibagué y Medellín. Toca un lugar para verlo en el mapa.</p>
+    <ol class="lugares"></ol>
+    <a class="btn btn-claro" href="#booking">Que suene en mi evento</a>
+  </div>
+  <svg class="mapa revela" role="img" aria-label="Mapa de Colombia con los lugares donde ha tocado"></svg>
+  <div class="cinta" aria-label="Artistas con los que compartió tarima"><div class="cinta-mueve"></div></div>
+</section>
+
+<!-- ───────── En imágenes ───────── -->
+<section class="capitulo galeria" aria-labelledby="galeria-titulo">
+  <div class="galeria-cabeza"><h2 id="galeria-titulo" class="revela">En imágenes</h2><p class="revela">Arrastra para recorrer. Toca una foto para verla grande.</p></div>
+  <div class="carrete" tabindex="0" aria-label="Fotos de EXCESS"></div>
+</section>
+
+<!-- ───────── Lo que viene ───────── -->
+<section class="capitulo viene" id="fechas">
+  <h2 class="revela">Lo que viene</h2>
+  <div class="metas">
+    <div class="revela"><h3>Más ciudades</h3><p>Llevar su sonido a más ciudades y escenarios del país.</p></div>
+    <div class="revela"><h3>Su propia música</h3><p>Está trabajando en sus primeros tracks. Pronto, aquí.</p></div>
+    <div class="revela"><h3>Los grandes festivales</h3><p>Su meta: tarimas como BAUM, DOOM y EDC.</p></div>
+  </div>
+  <div class="proximas">
+    <h3 class="revela">Próximos toques <span class="cuenta"></span></h3>
+    <ol class="fechas"></ol>
+  </div>
+</section>
+
+<!-- ───────── Booking ───────── -->
+<section class="capitulo booking" id="booking">
+  <div class="booking-texto">
+    <h2 class="revela">Llévalo a tu tarima</h2>
+    <p class="revela">Cuéntale la fecha, la ciudad y el evento. El mensaje llega directo a su WhatsApp y él te responde.</p>
+    <p class="rider revela">Equipo en tarima: CDJ-2000 NXS2 a CDJ-3000. Hardtechno, dark techno e industrial.</p>
+  </div>
+  <form class="formulario revela">
+    <label for="f-fecha">Fecha<input id="f-fecha" type="date" name="fecha" required></label>
+    <label for="f-ciudad">Ciudad<input id="f-ciudad" type="text" name="ciudad" autocomplete="address-level2" placeholder="Bogotá" required></label>
+    <label for="f-evento" class="ancho">Evento o club<input id="f-evento" type="text" name="evento" placeholder="Nombre del evento" required></label>
+    <button type="submit" class="btn btn-oscuro ancho">Enviar por WhatsApp</button>
+  </form>
+</section>
 
 <footer class="pie">
   <p class="pie-nombre" aria-hidden="true"><span>Excess</span></p>
   <div class="pie-linea">
-    <span>EXCESS · Tocancipá, sabana de Bogotá</span>
+    <span>EXCESS · Bogotá · Tocancipá</span>
     <nav aria-label="Redes"><a href="https://soundcloud.com/excess_ht-dj" target="_blank" rel="noopener">SoundCloud</a><a href="https://www.instagram.com/excess__dj" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/ExcessDJ795" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/umbra_club" target="_blank" rel="noopener">UMBRA CLUB</a></nav>
   </div>
 </footer>
 
+<dialog class="visor" aria-label="Foto ampliada"><img alt=""><p></p><button type="button" class="cerrar">Cerrar</button></dialog>
+
 <iframe class="sc" title="Reproductor de SoundCloud de EXCESS" allow="autoplay; encrypted-media"
   src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fusers%2F132857385&auto_play=false&show_artwork=false&visual=false"></iframe>
-<script src="cabina.js?v=6"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="historia.js?v=2"></script>
 </body>
 </html>
