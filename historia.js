@@ -1,6 +1,9 @@
 // EXCESS · la historia. Se lee bajando; cada capítulo acerca al visitante a contratarlo.
 // Consola: el reproductor oficial de SoundCloud controlado por postMessage. Movimiento: GSAP + ScrollTrigger.
 (() => {
+  // propuesta de rojo para revisar: ?rojo=1|2|3
+  // rojo neón: la propuesta 2 por defecto; ?rojo=1|3 para comparar, ?rojo=0 sin rojo
+  const rojo = new URLSearchParams(location.search).get('rojo') ?? '2'; if (/^[123]$/.test(rojo)) document.documentElement.classList.add('rojo-' + rojo);
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const raiz = document.documentElement, quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const escritorio = () => innerWidth > 900;
@@ -46,37 +49,65 @@
     f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true; marco.append(f);
     if (sonando) llamar('pause'); b.replaceWith(marco); });
 
-  // ───── Dónde ha sonado: lista + mapa + cinta ─────
-  const ns = 'http://www.w3.org/2000/svg', svgEl = (t, at) => { const e = document.createElementNS(ns, t); for (const k in at) e.setAttribute(k, at[k]); return e; };
-  const mapa = $('.mapa'); let vb = null, vbMeta = null, puntos = {};
-  const enfocar = (ciudad) => { const p = puntos[ciudad]; if (!p) return; const r = ciudad === 'Medellín' || ciudad === 'Ibagué' ? 110 : 60;
-    vbMeta = [p[0] - r, p[1] - r * 1.25, r * 2, r * 2.5];
-    $$('g', mapa).forEach((g) => { const si = g.dataset.ciudad === ciudad; g.classList.toggle('activa', si); g.style.opacity = si ? 1 : .45; $('text', g).style.fontSize = (r * .17) + 'px'; }); };
+  // ───── Dónde ha sonado: mapa digital (MapLibre + OpenFreeMap, uso comercial permitido) ─────
+  // El estilo base se repinta con la paleta de la marca: tierra en tinta, agua y vías en grafito, nombres en español.
+  const PINTA = { fondo: '#100B0A', agua: '#1C1514', tierra: '#130E0D', parque: '#151010', edificio: '#191312',
+    via: '#2E2626', viaMayor: '#433939', limite: '#6A5F5F', texto: '#A49A95', halo: '#100B0A' };
+  const repintar = (estilo) => {
+    estilo.layers = estilo.layers.filter((l) => !/poi|housenum|aeroway/.test(l.id) && l.source !== 'ne2_shaded');
+    estilo.layers.forEach((l) => { const id = l.id, p = (l.paint = l.paint || {});
+      if (l.type === 'background') p['background-color'] = PINTA.fondo;
+      else if (l.type === 'fill') p['fill-color'] = /water/.test(id) ? PINTA.agua : /building/.test(id) ? PINTA.edificio : /park|wood|grass|landcover/.test(id) ? PINTA.parque : PINTA.tierra;
+      else if (l.type === 'line') p['line-color'] = /water|river/.test(id) ? PINTA.agua : /boundary|admin/.test(id) ? PINTA.limite : /motorway|trunk|primary/.test(id) ? PINTA.viaMayor : PINTA.via;
+      else if (l.type === 'symbol') { p['text-color'] = PINTA.texto; p['text-halo-color'] = PINTA.halo; p['text-halo-width'] = 1.2;
+        if (l.layout && l.layout['text-field']) l.layout['text-field'] = ['coalesce', ['get', 'name:es'], ['get', 'name']];
+        if (l.layout) delete l.layout['icon-image']; }
+      if (p['fill-pattern']) delete p['fill-pattern']; });
+    return estilo; };
+  const VISTA_PAIS = { center: [-74.6, 5.3], zoom: 6.1 };
+  let mapaGL = null, marcadores = {}, datosLugares = null;
+  const ficha = $('.ficha');
+  const mostrarFicha = (l) => { ficha.replaceChildren();
+    const r = document.createElement('span'); r.className = 'rotulo'; r.textContent = l.ciudad;
+    const h = document.createElement('h3'); h.textContent = l.lugar;
+    const c = document.createElement('p'); c.className = 'cuando' + (l.cuando ? '' : ' pendiente'); c.textContent = l.cuando || 'Fecha por confirmar';
+    ficha.append(r, h, c);
+    if (l.eventos.length) { const u = document.createElement('ul'); l.eventos.forEach((e) => { const li = document.createElement('li'); li.textContent = e; u.append(li); }); ficha.append(u); }
+    if (l.flyer) { const i = document.createElement('img'); i.src = l.flyer; i.alt = `Flyer: ${l.lugar}`; ficha.append(i); }
+    ficha.hidden = false; };
+  const elegirLugar = (l, boton) => {
+    $$('.lugares button').forEach((b) => b.setAttribute('aria-pressed', b === boton));
+    Object.entries(marcadores).forEach(([c, m]) => m.getElement().classList.toggle('activo', c === l.ciudad));
+    mostrarFicha(l);
+    if (mapaGL) mapaGL.flyTo({ center: datosLugares.ciudades[l.ciudad], zoom: l.ciudad === 'Bogotá' ? 10.5 : 11.5, speed: quieto ? 4 : 1.1, curve: 1.5, essential: true });
+  };
   (async () => {
-    const [h, m] = await Promise.all([fetch('datos/historial.json').then((r) => r.json()), fetch('datos/mapa.json').then((r) => r.json())]);
-    puntos = m.lugares; const [, , W, H] = m.viewBox.split(' ').map(Number); vb = [0, 0, W, H]; mapa.setAttribute('viewBox', vb.join(' '));
-    for (let x = 0; x <= W; x += 50) mapa.append(svgEl('line', { x1: x, y1: 0, x2: x, y2: H, class: 'reja' }));
-    for (let y = 0; y <= H; y += 50) mapa.append(svgEl('line', { x1: 0, y1: y, x2: W, y2: y, class: 'reja' }));
-    mapa.append(svgEl('path', { d: m.pais, class: 'pais' }));
-    [...new Set(h.lugares.map((l) => l.ciudad))].forEach((c) => { const p = m.lugares[c]; if (!p) return; const g = svgEl('g', { 'data-ciudad': c });
-      g.append(svgEl('circle', { cx: p[0], cy: p[1], r: 4, class: 'onda-p' }), svgEl('circle', { cx: p[0], cy: p[1], r: 3, class: 'punto' }));
-      const t = svgEl('text', { x: p[0] + 6, y: p[1] - 6 }); t.textContent = c; g.append(t); mapa.append(g); });
+    datosLugares = await fetch('datos/lugares.json').then((r) => r.json());
     const lista = $('.lugares');
-    h.lugares.filter((l) => l.lugar !== 'Fiestas en la sabana' && l.lugar !== 'Presentación').forEach((l, i) => {
-      const li = document.createElement('li'); li.tabIndex = 0; li.setAttribute('aria-selected', i === 0);
-      const a = document.createElement('div'); const b = document.createElement('b'); b.textContent = l.lugar; a.append(b);
-      if (l.detalle) { const s = document.createElement('small'); s.textContent = l.detalle; a.append(s); }
-      const c = document.createElement('span'); c.textContent = l.ciudad; li.append(a, c);
-      const elegir = () => { $$('li', lista).forEach((x) => x.setAttribute('aria-selected', x === li)); enfocar(l.ciudad); };
-      li.addEventListener('click', elegir); li.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); elegir(); } });
-      lista.append(li); });
-    const otras = h.lugares.filter((l) => l.lugar === 'Fiestas en la sabana' || l.lugar === 'Presentación').map((l) => l.ciudad);
-    if (otras.length) { const li = document.createElement('li'); li.tabIndex = 0; const a = document.createElement('div'); const b = document.createElement('b');
-      b.textContent = 'Fiestas y eventos'; const s = document.createElement('small'); s.textContent = otras.join(' · '); a.append(b, s);
-      const c = document.createElement('span'); c.textContent = 'Sabana y más'; li.append(a, c);
-      li.addEventListener('click', () => { $$('li', lista).forEach((x) => x.setAttribute('aria-selected', x === li)); enfocar('Zipaquirá'); }); lista.append(li); }
-    enfocar(h.lugares[0].ciudad);
-    $('.cinta-mueve').textContent = `Compartió tarima con   ${h.compartio.join('   ·   ')}   ·   `.repeat(2);
+    datosLugares.lugares.forEach((l) => { const li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
+      b.setAttribute('aria-pressed', 'false');
+      const n = document.createElement('b'); n.textContent = l.lugar; const c = document.createElement('span'); c.textContent = l.ciudad;
+      const d = document.createElement('small'); d.textContent = [l.cuando || 'Fecha por confirmar', ...l.eventos].join(' · ');
+      b.append(n, c, d); b.addEventListener('click', () => elegirLugar(l, b)); li.append(b); lista.append(li); });
+    $('.cinta-mueve').textContent = `Compartió tarima con   ${datosLugares.compartio.join('   ·   ')}   ·   `.repeat(2);
+    if (!window.maplibregl) return;
+    const estilo = repintar(await fetch('https://tiles.openfreemap.org/styles/positron').then((r) => r.json()));
+    mapaGL = new maplibregl.Map({ container: 'mapa', style: estilo, ...VISTA_PAIS, minZoom: 4.5, maxZoom: 15,
+      attributionControl: { compact: true }, cooperativeGestures: true, dragRotate: false, pitchWithRotate: false,
+      locale: { 'CooperativeGesturesHandler.WindowsHelpText': 'Usa Ctrl + rueda para acercar el mapa',
+        'CooperativeGesturesHandler.MacHelpText': 'Usa ⌘ + rueda para acercar el mapa',
+        'CooperativeGesturesHandler.MobileHelpText': 'Usa dos dedos para mover el mapa',
+        'NavigationControl.ZoomIn': 'Acercar', 'NavigationControl.ZoomOut': 'Alejar' } });
+    mapaGL.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    mapaGL.touchZoomRotate.disableRotation();
+    // lejos solo se leen las ciudades principales; al acercarse aparecen los pueblos de la sabana
+    const cerca = () => $('#mapa').classList.toggle('cerca', mapaGL.getZoom() >= 8.6); mapaGL.on('zoom', cerca); cerca();
+    const porCiudad = {}; datosLugares.lugares.forEach((l) => (porCiudad[l.ciudad] = porCiudad[l.ciudad] || []).push(l));
+    Object.entries(porCiudad).forEach(([ciudad, ls]) => {
+      const el = document.createElement('button'); el.type = 'button'; el.className = 'pin' + (['Bogotá', 'Tocancipá', 'Medellín', 'Ibagué', 'Sibaté'].includes(ciudad) ? ' mayor' : ''); el.setAttribute('aria-label', `${ciudad}: ${ls.length} lugar${ls.length > 1 ? 'es' : ''}`);
+      const punto = document.createElement('i'); const nom = document.createElement('b'); nom.textContent = ls.length > 1 ? `${ciudad} · ${ls.length}` : ciudad; el.append(punto, nom);
+      el.addEventListener('click', () => { const b = $$('.lugares button').find((x) => $('span', x).textContent === ciudad); elegirLugar(ls[0], b); if (b) b.scrollIntoView({ block: 'nearest' }); });
+      marcadores[ciudad] = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat(datosLugares.ciudades[ciudad]).addTo(mapaGL); });
   })();
 
   // ───── En imágenes: carrete que se arrastra + visor ─────
@@ -192,9 +223,8 @@
       const c = lienzo.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
       const datos = onda || ondaSemilla(400), n = Math.min(datos.length, Math.floor(w / 2)), paso = datos.length / n;
       for (let i = 0; i < n; i++) { const a = datos[Math.floor(i * paso)], bh = Math.max(1, a * (h - 10));
-        c.fillStyle = i / n < rel ? '#e9e7e2' : '#3c3c3c'; c.fillRect(i * w / n, (h - bh) / 2, Math.max(1, w / n - .6), bh); }
+        c.fillStyle = i / n < rel ? '#EFE9E2' : '#433939'; c.fillRect(i * w / n, (h - bh) / 2, Math.max(1, w / n - .6), bh); }
       c.fillStyle = '#fff'; c.fillRect(rel * w - 1, 0, 2, h); }
-    if (vb && vbMeta) { vb = vb.map((v, i) => v + (vbMeta[i] - v) * Math.min(1, dt * 4)); mapa.setAttribute('viewBox', vb.map((v) => v.toFixed(1)).join(' ')); }
     requestAnimationFrame(ciclo);
   };
   requestAnimationFrame(ciclo);

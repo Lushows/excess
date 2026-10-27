@@ -1,0 +1,31 @@
+{
+  "nota": "Dónde ha tocado EXCESS. 'cuando' vacío = 'Fecha por confirmar' (pedírselo al DJ). 'flyer' = ruta de la imagen en img/flyers/ cuando la mande. Las coordenadas son de la CIUDAD, no del club exacto.",
+  "ciudades": {
+    "Tocancipá": [-73.913, 4.965],
+    "Bogotá": [-74.072, 4.711],
+    "Sibaté": [-74.259, 4.491],
+    "Ibagué": [-75.232, 4.438],
+    "Medellín": [-75.581, 6.244],
+    "Zipaquirá": [-74.004, 5.022],
+    "Cajicá": [-74.028, 4.918],
+    "Gachancipá": [-73.873, 4.991],
+    "Suesca": [-73.799, 5.103]
+  },
+  "lugares": [
+    { "lugar": "UMBRA CLUB", "ciudad": "Tocancipá", "cuando": "Residencia actual", "eventos": ["Los Decks 2025 · Temporada 1"], "flyer": "" },
+    { "lugar": "Anticuario", "ciudad": "Bogotá", "cuando": "2022", "eventos": ["Despedida Hard Kapital Tour Europa 2022", "Umbras Possession"], "flyer": "" },
+    { "lugar": "Radio Berlín", "ciudad": "Bogotá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Antisistema", "ciudad": "Bogotá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Radio 57", "ciudad": "Bogotá", "cuando": "", "eventos": ["Music and Pets"], "flyer": "" },
+    { "lugar": "Club Gallístico San Miguel", "ciudad": "Bogotá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Extended Ledh", "ciudad": "Bogotá", "cuando": "", "eventos": ["Evento"], "flyer": "" },
+    { "lugar": "El Galpón", "ciudad": "Sibaté", "cuando": "", "eventos": ["Infected System"], "flyer": "" },
+    { "lugar": "Ibagué Free Rave", "ciudad": "Ibagué", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Medellín", "ciudad": "Medellín", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Zipaquirá", "ciudad": "Zipaquirá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Cajicá", "ciudad": "Cajicá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Gachancipá", "ciudad": "Gachancipá", "cuando": "", "eventos": [], "flyer": "" },
+    { "lugar": "Suesca", "ciudad": "Suesca", "cuando": "", "eventos": [], "flyer": "" }
+  ],
+  "compartio": ["Acid Flux (MX)", "Leon KB (BR)", "Bamb (BR)", "Loraw (DE)", "Ledh", "Dabeat", "Sonico", "Lourdes", "Bugstrip", "Aleja Vargas", "Alex Jockey", "Soufly", "Bluekim", "E-Machine", "Raveyeff"]
+}

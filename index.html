@@ -8,8 +8,9 @@
 <meta name="description" content="EXCESS, DJ de hardtechno de Bogotá. Creó y dirige UMBRA y es residente de UMBRA CLUB en Tocancipá. Su historia, su sonido, sus sets y booking.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Onest:wght@400;500&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="historia.css?v=9">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css" rel="stylesheet">
+<link rel="stylesheet" href="historia.css?v=13">
 </head>
 <body>
 
@@ -155,16 +156,21 @@
   </div>
 </section>
 
-<!-- ───────── Dónde ha sonado ───────── -->
+<!-- ───────── Dónde ha sonado: mapa digital ───────── -->
 <section class="capitulo donde" id="donde">
-  <div class="donde-texto">
+  <div class="donde-cabeza">
     <span class="kicker revela">VI · La pista</span>
     <h2 class="revela">Dónde ha sonado</h2>
-    <p class="revela">De su residencia en Tocancipá a los clubes de Bogotá, Sibaté, Ibagué y Medellín. Toca un lugar para verlo en el mapa.</p>
-    <ol class="lugares"></ol>
-    <a class="btn btn-claro" href="#booking">Que suene en mi evento</a>
+    <p class="bajada revela">De su residencia en Tocancipá a Bogotá, Sibaté, Ibagué y Medellín. Toca un lugar para ir hasta allá en el mapa y ver cuándo tocó.</p>
   </div>
-  <svg class="mapa revela" role="img" aria-label="Mapa de Colombia con los lugares donde ha tocado"></svg>
+  <div class="donde-cuerpo">
+    <ol class="lugares" aria-label="Lugares donde ha tocado"></ol>
+    <div class="mapa-marco">
+      <div id="mapa" class="mapa" role="region" aria-label="Mapa de Colombia con los lugares donde ha tocado"></div>
+      <div class="ficha" aria-live="polite" hidden></div>
+    </div>
+  </div>
+  <a class="btn btn-claro donde-cta" href="#booking">Que suene en mi evento</a>
   <div class="cinta" aria-label="Artistas con los que compartió tarima"><div class="cinta-mueve"></div></div>
 </section>
 
@@ -217,8 +223,9 @@
 
 <iframe class="sc" title="Reproductor de SoundCloud de EXCESS" allow="autoplay; encrypted-media"
   src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fusers%2F132857385&auto_play=false&show_artwork=false&visual=false"></iframe>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="historia.js?v=3"></script>
+<script src="historia.js?v=6"></script>
 </body>
 </html>
